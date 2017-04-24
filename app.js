@@ -32,8 +32,8 @@ app.use(cors());
 app.use('/', index);
 app.use('/users', users);
 var authCheck = jwt({
-  secret: new Buffer('mjBE0eskVXIZGNLIDSIh1EDbnPV53Vf1ecavELZb_9s1b7ZbcSt5dwGEJZhXa51o', 'base64'),
-  audience: 'WnoqRrrS5k6PX7o67juJi0hDlzCvudls'
+  secret: new Buffer('FSrxB0sCo2tHVsPEwQ5J1-iuzkK4X_wZm7KDSXJsEjRGzdF4f_JdQIsgENuwmAbz'),
+  audience: 'fuAkz6gQf9qEkPxRNdacG9xpsT6Zy05R'
 });
 var users = [
   { id: 1, name: 'Todd Motto', image: 'image-1.jpg' },
@@ -53,7 +53,7 @@ res.setHeader('Access-Control-Allow-Origin', '*');
 next();
 });
 
-app.get('/api/users', function(req, res) {
+app.get('/api/users', authCheck,function(req, res) {
   
 
   res.json(users);
