@@ -5,21 +5,19 @@ var mongo=require('mongoskin');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
- // console.log("hello");
+ console.log("hello");
   //console.log(req.query.lat);
-db=mongo.db("mongodb://localhost:27017/test",{native_parser:true});
+db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
+
   db.bind('clubs');
-  db.clubs.find(data,function (err,docinserted) {
-    console.log("123");
-    if(err){
-      console.log("error");
-      throw err;
-      }
-      console.log(docinserted);
-      return db.close();
-
-  })
-  res.send(req.query);
+  console.log(req.query.long);
+  db.clubs.find({location:{
+$near:{$geometry:{type:"Point",coordinates:[parseFloat(req.query.long), parseFloat(req.query.lat)]},
+$maxDistance:2000}}}).toArray(function(err,clubs){
+  console.log(err);
+res.send(clubs);
 });
-
+  
+   
+});
 module.exports = router;
