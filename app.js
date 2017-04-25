@@ -13,12 +13,17 @@ var cors = require('cors');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
+// <<<<<<< HEAD
 var club = require('./routes/club');
 var addclub = require('./routes/addclub');
 var EventPost = require('./routes/EventPost');
 var AnnouncementPost = require('./routes/AnnouncementPost');
+var joinclub = require('./routes/joinClub');
 
 
+// =======
+// var joinclub = require('./routes/joinClub');
+// >>>>>>> fe506d21905ec2cbc253373e02330a29317dfa00
 var app = express();
 
 // view engine setup
@@ -43,8 +48,8 @@ app.use('/club', club);
 
 
 var authCheck = jwt({
-  secret: new Buffer('mjBE0eskVXIZGNLIDSIh1EDbnPV53Vf1ecavELZb_9s1b7ZbcSt5dwGEJZhXa51o', 'base64'),
-  audience: 'WnoqRrrS5k6PX7o67juJi0hDlzCvudls'
+  secret: new Buffer('FSrxB0sCo2tHVsPEwQ5J1-iuzkK4X_wZm7KDSXJsEjRGzdF4f_JdQIsgENuwmAbz'),
+  audience: 'fuAkz6gQf9qEkPxRNdacG9xpsT6Zy05R'
 });
 var users = [
   { id: 1, name: 'Todd Motto', image: 'image-1.jpg' },
@@ -64,12 +69,14 @@ res.setHeader('Access-Control-Allow-Origin', '*');
 next();
 });
 
-app.get('/api/users', function(req, res) {
+app.get('/api/users', authCheck,function(req, res) {
+
 
 
   res.json(users);
 });
-app.use('/api/clubsNearBy',clubsNearBy );
+app.use('/api/joinClub',authCheck, joinclub);
+app.use('/api/clubsNearBy',authCheck,clubsNearBy );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
