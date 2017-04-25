@@ -14,7 +14,9 @@ db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
   db.clubs.find({location:{
 $near:{$geometry:{type:"Point",coordinates:[parseFloat(req.query.long), parseFloat(req.query.lat)]},
 $maxDistance:2000}}}).toArray(function(err,clubs){
-  console.log(err);
+//  db.bind('members');
+  //db.members.find("")
+  console.log(clubs);
 res.send(clubs);
 });
   

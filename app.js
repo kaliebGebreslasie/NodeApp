@@ -13,7 +13,7 @@ var cors = require('cors');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
-
+var joinclub = require('./routes/joinClub');
 var app = express();
 
 // view engine setup
@@ -58,7 +58,8 @@ app.get('/api/users', authCheck,function(req, res) {
 
   res.json(users);
 });
-app.use('/api/clubsNearBy',clubsNearBy );
+app.use('/api/joinClub',authCheck, joinclub);
+app.use('/api/clubsNearBy',authCheck,clubsNearBy );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
