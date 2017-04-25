@@ -13,6 +13,11 @@ var cors = require('cors');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
+var club = require('./routes/club');
+var addclub = require('./routes/addclub');
+var EventPost = require('./routes/EventPost');
+var AnnouncementPost = require('./routes/AnnouncementPost');
+
 
 var app = express();
 
@@ -31,6 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/', index);
 app.use('/users', users);
+app.use('/addclub', addclub);
+app.use('/EventPost', EventPost);
+app.use('/announcmentpost', AnnouncementPost);
+app.use('/club', club);
+
+
 var authCheck = jwt({
   secret: new Buffer('mjBE0eskVXIZGNLIDSIh1EDbnPV53Vf1ecavELZb_9s1b7ZbcSt5dwGEJZhXa51o', 'base64'),
   audience: 'WnoqRrrS5k6PX7o67juJi0hDlzCvudls'
@@ -54,7 +65,7 @@ next();
 });
 
 app.get('/api/users', function(req, res) {
-  
+
 
   res.json(users);
 });
