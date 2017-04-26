@@ -5,9 +5,9 @@ var mongo=require('mongoskin');
 /* GET users listing. *///retrive all events
 router.get('/', function(req, res, next) {
 
-var db=mongo.db("mongodb://localhost:27017/test",{native_parser:true});
+var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 console.log( req.query.name);
-db.bind('club');
+db.bind('clubs');
 var query={"memeber":req.query.name};
 var operator={"events":1,"_id":0};
 db.club.find(query,operator).toArray(function (err,data) {

@@ -5,7 +5,7 @@ var mongo=require('mongoskin');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
 var data=req.body;
-var db=mongo.db("mongodb://localhost:27017/test",{native_parser:true});
+var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 db.bind('clubs');
 var query={"clubname":data.clubname};
 var operator={'$push':{"announcments":{'owner':data.name,'announcment':data.announcment}}};
