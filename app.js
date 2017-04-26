@@ -15,6 +15,8 @@ var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
 
 var startRide = require('./routes/startRide');
+var liveRide=require('./routes/liveRide');
+
 
 var club = require('./routes/club');
 var addclub = require('./routes/addclub');
@@ -23,7 +25,7 @@ var AnnouncementPost = require('./routes/AnnouncementPost');
 var joinclub = require('./routes/joinClub');
  var userProfile = require('./routes/userProfile');
 
-
+var joinEvent=require('./routes/joinEvent');
 
 var app = express();
 
@@ -46,8 +48,9 @@ app.use('/addclub', addclub);
 app.use('/EventPost', EventPost);
 app.use('/announcmentpost', AnnouncementPost);
 app.use('/club', club);
-app.use('/startRide', startRide);
-
+app.use('/api/startRide', startRide);
+app.use('/api/liveRide', liveRide);
+app.use('/api/joinEvent', joinEvent);
 
 var authCheck = jwt({
   secret: new Buffer('FSrxB0sCo2tHVsPEwQ5J1-iuzkK4X_wZm7KDSXJsEjRGzdF4f_JdQIsgENuwmAbz'),
