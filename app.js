@@ -13,17 +13,16 @@ var cors = require('cors');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
-// <<<<<<< HEAD
+
 var club = require('./routes/club');
 var addclub = require('./routes/addclub');
 var EventPost = require('./routes/EventPost');
 var AnnouncementPost = require('./routes/AnnouncementPost');
 var joinclub = require('./routes/joinClub');
+ var userProfile = require('./routes/userProfile');
 
 
-// =======
-// var joinclub = require('./routes/joinClub');
-// >>>>>>> fe506d21905ec2cbc253373e02330a29317dfa00
+
 var app = express();
 
 // view engine setup
@@ -45,6 +44,7 @@ app.use('/addclub', addclub);
 app.use('/EventPost', EventPost);
 app.use('/announcmentpost', AnnouncementPost);
 app.use('/club', club);
+
 
 
 var authCheck = jwt({

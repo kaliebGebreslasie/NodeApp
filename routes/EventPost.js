@@ -5,9 +5,9 @@ var mongo=require('mongoskin');
 /* GET users listing. *///retrive all events
 router.get('/', function(req, res, next) {
 
-var db=mongo.db("mongodb://localhost:27017/test",{native_parser:true});
+var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 console.log( req.query.name);
-db.bind('club');
+db.bind('clubs');
 var query={"memeber":req.query.name};
 var operator={"events":1,"_id":0};
 db.club.find(query,operator).toArray(function (err,data) {
@@ -28,14 +28,17 @@ db.club.find(query,operator).toArray(function (err,data) {
 //////addd event
 router.post('/', function(req, res, next) {
 var data=req.body;
+console.log(data);
 
-var db=mongo.db("mongodb://localhost:27017/test",{native_parser:true});
+var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 db.bind('clubs');
 var query={"clubname":data.clubname};
-var operator={'$push':{"events":{'owner':data.name,'event':data.event}}};
+console.log(data.clubname+"  "+data.owner);
+var operator={'$push':{"events":{'eventname':data.eventname,'owner':data.owner,'event':data.event}}};
 db.clubs.update(query,operator,function (err,numupdated){
   if(err) throw err;
   console.log("success"+numupdated)
+  res.send(numupdated);
   return db.close();
 });
 
