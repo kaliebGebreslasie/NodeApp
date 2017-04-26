@@ -14,6 +14,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
 
+var startRide = require('./routes/startRide');
+
 var club = require('./routes/club');
 var addclub = require('./routes/addclub');
 var EventPost = require('./routes/EventPost');
@@ -44,7 +46,7 @@ app.use('/addclub', addclub);
 app.use('/EventPost', EventPost);
 app.use('/announcmentpost', AnnouncementPost);
 app.use('/club', club);
-
+app.use('/startRide', startRide);
 
 
 var authCheck = jwt({
