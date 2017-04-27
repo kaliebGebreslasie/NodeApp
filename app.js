@@ -15,6 +15,8 @@ var users = require('./routes/users');
 var clubsNearBy = require('./routes/clubsNearBy');
 
 var startRide = require('./routes/startRide');
+var liveRide=require('./routes/liveRide');
+
 
 var club = require('./routes/club');
 var addclub = require('./routes/addclub');
@@ -24,8 +26,13 @@ var joinclub = require('./routes/joinClub');
  var userProfile = require('./routes/userProfile');
  var chat = require('./routes/chat');
 
+<<<<<<< HEAD
 //
 ///////////////////////////new /////////////////////////
+=======
+var joinEvent=require('./routes/joinEvent');
+
+>>>>>>> b44ddbed5f4705c88bb4db7e8a3de05bf462a047
 var app = express();
 var server = require("http").Server(app);
 var io = require("socket.io").listen(server);
@@ -55,9 +62,13 @@ app.use('/addclub', addclub);
 app.use('/EventPost', EventPost);
 app.use('/announcmentpost', AnnouncementPost);
 app.use('/club', club);
-app.use('/startRide', startRide);
+
+
  app.use('/chat', chat);
-//app.use('/userProfile', userProfile);
+
+app.use('/api/startRide', startRide);
+app.use('/api/liveRide', liveRide);
+app.use('/api/joinEvent', joinEvent);
 
 
 var authCheck = jwt({

@@ -14,27 +14,40 @@ router.post('/', function(req, res, next) {
   //console.log(req.query.lat);
 db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 
-  db.bind('members');
+  db.bind('clubs');
   console.log(req.body);
   data=req.body;
- var query={"name":data.name};
- var operator1={$set:{"email":data.email,"picture":data.picture},"$addToSet":{"clubs":data.clubname}};
+ var query={$and:[{"clubname":data.clubname}]};
+// var operator1={$addToSet:{"events.members":data.member}};
 //var operator2={'$push':{"clubs":data.clubname}};
 
 var flag={upsert:true};
-db.members.update(query,operator1,flag,function (err,numupdated){
+
+db.clubs.find(query).toArray(function(err,docs){
+docs.forEach(function(doc){
+  doc.events.forEach(function(event){
+     if(event.eventname==data.eventname){
+       console.log("index"+(event.members).indexOf( data.member));
+ //event.status="start";
+ if ((event.members).indexOf( data.member) ==-1) {
+    event.members.push(data.member);
+}
+ 
+     }
+  });
+  var operator1={$set:{"events":doc.events}};
+db.clubs.update(query,operator1,function (err,numupdated){
   console.log("helllllll");
   if(err) console.log("errrrrr"+err);
   console.log("success"+numupdated)
   });
-  db.bind("clubs");
-  var operator2={"$addToSet":{"memeber":data.name}};
-  console.log(data.clubname);
-  db.clubs.update({"clubname":data.clubname},operator2,function(err,nupdated){
-    console.log("errr"+err);
-    console.log(nupdated);
-     res.send(nupdated);
-  })
+
+})
+
+});
+
+
+ 
  
  
 
