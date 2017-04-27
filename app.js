@@ -30,6 +30,7 @@ var joinclub = require('./routes/joinClub');
 var joinEvent=require('./routes/joinEvent');
 
 
+
 var app=express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

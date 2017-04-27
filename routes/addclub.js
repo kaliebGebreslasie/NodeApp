@@ -23,8 +23,10 @@ var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
       }
       console.log(docinserted);
       return db.close();
+
  res.send(docinserted);
   })
+
 
  });
 
