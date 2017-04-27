@@ -4,7 +4,6 @@ var mongo=require('mongoskin');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-console.log("entered");
 var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 console.log( req.query.name);
 db.bind('clubs');
