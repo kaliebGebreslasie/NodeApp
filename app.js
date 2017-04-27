@@ -26,17 +26,12 @@ var joinclub = require('./routes/joinClub');
  var userProfile = require('./routes/userProfile');
  var chat = require('./routes/chat');
 
-<<<<<<< HEAD
-//
-///////////////////////////new /////////////////////////
-=======
+
 var joinEvent=require('./routes/joinEvent');
 
->>>>>>> b44ddbed5f4705c88bb4db7e8a3de05bf462a047
+
 var app = express();
-var server = require("http").Server(app);
-var io = require("socket.io").listen(server);
-///////////////////////////new /////////////////////////
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -80,15 +75,7 @@ var users = [
   { id: 2, name: 'Brad Green', image: 'image-2.jpg' },
   { id: 3, name: 'Igor Minar', image: 'image-3.jpg' }
 ];
-// ///////////////////////////new /////////////////////////
-//
-io.on("connection", function(socket){
-    socket.on("send message", function(msg){
-        io.emit("send message", msg);
-    });
-});
 
-// ///////////////////////////new /////////////////////////
 app.use(function(req, res,next) {
 res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

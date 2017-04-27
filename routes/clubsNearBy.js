@@ -12,9 +12,9 @@ db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
   db.bind('clubs');
   console.log(req.query.long);
     console.log(req.query.lat);
-  db.clubs.find({location:{
+  db.clubs.find({$and:[{memeber:{$nin:[req.query.membername]}},{location:{
 $near:{$geometry:{type:"Point",coordinates:[parseFloat(req.query.long), parseFloat(req.query.lat)]},
-$maxDistance:200000}}}).toArray(function(err,clubs){
+$maxDistance:200000}}}]}).toArray(function(err,clubs){
 //  db.bind('members');
   //db.members.find("")
   console.log(err);
