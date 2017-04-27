@@ -22,10 +22,14 @@ var EventPost = require('./routes/EventPost');
 var AnnouncementPost = require('./routes/AnnouncementPost');
 var joinclub = require('./routes/joinClub');
  var userProfile = require('./routes/userProfile');
+ var chat = require('./routes/chat');
 
-
-
+//
+///////////////////////////new /////////////////////////
 var app = express();
+var server = require("http").Server(app);
+var io = require("socket.io").listen(server);
+///////////////////////////new /////////////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +43,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+///////////////////////////new /////////////////////////
+// app.use("/scripts", express.static(__dirname + "/node_modules/"));
+
+///////////////////////////new /////////////////////////
 app.use(cors());
 app.use('/', index);
 app.use('/users', users);
@@ -47,6 +56,8 @@ app.use('/EventPost', EventPost);
 app.use('/announcmentpost', AnnouncementPost);
 app.use('/club', club);
 app.use('/startRide', startRide);
+ app.use('/chat', chat);
+//app.use('/userProfile', userProfile);
 
 
 var authCheck = jwt({
@@ -58,6 +69,15 @@ var users = [
   { id: 2, name: 'Brad Green', image: 'image-2.jpg' },
   { id: 3, name: 'Igor Minar', image: 'image-3.jpg' }
 ];
+// ///////////////////////////new /////////////////////////
+//
+io.on("connection", function(socket){
+    socket.on("send message", function(msg){
+        io.emit("send message", msg);
+    });
+});
+
+// ///////////////////////////new /////////////////////////
 app.use(function(req, res,next) {
 res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 var db=mongo.db("mongodb://localhost:27017/cycling",{native_parser:true});
 console.log( req.query.name);
 db.bind('clubs');
-var query={"clubname":'nice'};
+var query={"clubname":req.query.name};
 //var operator={"events":1,"_id":0};
 db.clubs.findOne(query,function (err,data) {
 //  console.log("123");
